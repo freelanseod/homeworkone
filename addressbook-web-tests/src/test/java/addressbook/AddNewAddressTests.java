@@ -1,6 +1,7 @@
 package addressbook;
 
 import java.util.concurrent.TimeUnit;
+
 import org.testng.annotations.*;
 
 import org.openqa.selenium.*;
@@ -13,6 +14,10 @@ public class AddNewAddressTests {
     public void setUp() throws Exception {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        login("admin", "secret");
+    }
+
+    private void login(String username, String password) {
         wd.get("http://localhost/addressbook/index.php");
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
@@ -24,28 +29,48 @@ public class AddNewAddressTests {
 
     @Test
     public void testAddNewAddress() throws Exception {
-        wd.findElement(By.linkText("add new")).click();
+        goToAddNewAddressPage();
+        fillAddressForm(new AddressData("first name test", "middle name test", "last name test", "nickname test", "test company"));
+        submitContactAdding();
+        goToHomePage();
+    }
+
+    private void submitContactAdding() {
+        wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+    }
+
+    private void fillAddressForm(AddressData addressData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys("first name test");
+        wd.findElement(By.name("firstname")).sendKeys(addressData.getFirstname());
         wd.findElement(By.name("middlename")).clear();
-        wd.findElement(By.name("middlename")).sendKeys("middle name test");
+        wd.findElement(By.name("middlename")).sendKeys(addressData.getMiddlename());
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys("last name test");
+        wd.findElement(By.name("lastname")).sendKeys(addressData.getLastname());
         wd.findElement(By.name("nickname")).click();
         wd.findElement(By.name("nickname")).clear();
-        wd.findElement(By.name("nickname")).sendKeys("nickname test");
+        wd.findElement(By.name("nickname")).sendKeys(addressData.getNickname());
         wd.findElement(By.name("company")).click();
         wd.findElement(By.name("company")).clear();
-        wd.findElement(By.name("company")).sendKeys("test company");
-        wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+        wd.findElement(By.name("company")).sendKeys(addressData.getCompany());
+    }
+
+    private void goToAddNewAddressPage() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
+    private void goToHomePage() {
         wd.findElement(By.linkText("home page")).click();
+    }
+
+    private void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() throws Exception {
+        logout();
         wd.quit();
     }
 
@@ -66,4 +91,5 @@ public class AddNewAddressTests {
             return false;
         }
     }
+
 }
