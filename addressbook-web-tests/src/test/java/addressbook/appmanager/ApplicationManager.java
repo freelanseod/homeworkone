@@ -1,7 +1,6 @@
 package addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -18,6 +17,7 @@ public class ApplicationManager {
     public void init() {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.get("http://localhost/addressbook/group.php?new=New+group");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
@@ -39,15 +39,6 @@ public class ApplicationManager {
             wd.findElement(by);
             return true;
         } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    private boolean isAlertPresent() {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
             return false;
         }
     }
