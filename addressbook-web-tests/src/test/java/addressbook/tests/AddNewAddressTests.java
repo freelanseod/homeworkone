@@ -7,10 +7,10 @@ public class AddNewAddressTests extends TestBase {
 
     @Test
     public void testAddNewAddress() throws Exception {
-        app.goToAddNewAddressPage();
-        app.fillAddressForm(new AddressData("first name test", "middle name test", "last name test", "nickname test", "test company"));
-        app.submitContactAdding();
-        app.goToHomePage();
+        app.getNavigationHelper().goToAddNewAddressPage();
+        app.getContactHelper().fillAddressForm(new AddressData("first name test", "middle name test", "last name test", "nickname test", "test company"));
+        app.getContactHelper().submitContactAdding();
+        app.getNavigationHelper().goToHomePage();
     }
 
 }
