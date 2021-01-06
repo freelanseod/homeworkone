@@ -21,4 +21,28 @@ public class ContactHelper extends BaseHelper {
         type(By.name("company"), addressData.getCompany());
     }
 
+    public void selectContact() {
+        click(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[1]"));
+    }
+
+    public void submitContactDeletion() {
+        click(By.xpath("//input[@value='Delete']"));
+    }
+
+    public void agreeContactDeletion() {
+        wd.switchTo().alert().accept();
+    }
+
+    public void selectAllContacts() {
+        click(By.id("MassCB"));
+    }
+
+    public void submitContactEditing() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void submitContactUpdate() {
+        click(By.name("update"));
+    }
+
 }
