@@ -8,9 +8,9 @@ public class AddressModificationTests extends TestBase {
     @Test
     public void testAddressModification() {
         app.getNavigationHelper().goToAddNewAddressPage();
-        app.getContactHelper().fillAddressForm(new AddressData("first name test", "middle name test", "last name test", "nickname test", "test company"));
-        app.getContactHelper().submitContactAdding();
-        app.getNavigationHelper().goToHomePage();
+        if (!app.getContactHelper().isThereAContact()) {
+            app.getContactHelper().createContact();
+        }
 
         app.getContactHelper().selectContact();
         app.getContactHelper().submitContactEditing();

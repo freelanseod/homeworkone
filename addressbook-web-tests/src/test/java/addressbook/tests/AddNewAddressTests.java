@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class AddNewAddressTests extends TestBase {
 
     @Test
-    public void testAddNewAddress() throws Exception {
+    public void testAddNewAddress() {
         app.getNavigationHelper().goToAddNewAddressPage();
         app.getContactHelper().fillAddressForm(new AddressData("first name test", "middle name test", "last name test", "nickname test", "test company"));
         app.getContactHelper().submitContactAdding();

@@ -7,6 +7,10 @@ public class AddressDeletionTests extends TestBase {
     @Test
     public void testDeleteAddress() {
         app.getNavigationHelper().goToHomePage();
+        if (!app.getContactHelper().isThereAContact()) {
+            app.getContactHelper().createContact();
+        }
+
         app.getContactHelper().selectContact();
         app.getContactHelper().submitContactDeletion();
         app.getContactHelper().agreeContactDeletion();
@@ -16,6 +20,10 @@ public class AddressDeletionTests extends TestBase {
     @Test
     public void testDeleteAllAddresses() {
         app.getNavigationHelper().goToHomePage();
+        if (!app.getContactHelper().isThereAContact()) {
+            app.getContactHelper().createContact();
+        }
+
         app.getContactHelper().selectAllContacts();
         app.getContactHelper().submitContactDeletion();
         app.getContactHelper().agreeContactDeletion();

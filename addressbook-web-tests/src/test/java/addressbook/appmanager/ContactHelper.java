@@ -45,4 +45,14 @@ public class ContactHelper extends BaseHelper {
         click(By.name("update"));
     }
 
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createContact() {
+        fillAddressForm(new AddressData("first name test", "middle name test", "last name test", "nickname test", "test company"));
+        submitContactAdding();
+        click(By.linkText("home"));
+    }
+
 }
