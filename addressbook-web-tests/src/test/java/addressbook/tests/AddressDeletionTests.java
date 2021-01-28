@@ -17,7 +17,7 @@ public class AddressDeletionTests extends TestBase {
         }
         List<AddressData> before = app.getContactHelper().getContactList();
 
-        app.getContactHelper().selectContact();
+        app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().submitContactDeletion();
         app.getContactHelper().agreeContactDeletion();
         app.getNavigationHelper().goToHomePage();
