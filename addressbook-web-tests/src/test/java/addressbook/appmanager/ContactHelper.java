@@ -25,8 +25,8 @@ public class ContactHelper extends BaseHelper {
         type(By.name("company"), addressData.getCompany());
     }
 
-    public void selectContact() {
-        click(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[1]"));
+    public void selectContact(int index) {
+        wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[1]")).get(index).click();
     }
 
     public void submitContactDeletion() {

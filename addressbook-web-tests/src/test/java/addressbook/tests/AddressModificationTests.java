@@ -17,7 +17,7 @@ public class AddressModificationTests extends TestBase {
         }
         List<AddressData> before = app.getContactHelper().getContactList();
 
-        app.getContactHelper().selectContact();
+        app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().submitContactEditing();
         AddressData contact = new AddressData("first name test", "last name test");
         app.getContactHelper().fillAddressForm(contact);
