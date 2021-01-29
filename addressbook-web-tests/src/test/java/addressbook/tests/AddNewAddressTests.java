@@ -11,16 +11,16 @@ public class AddNewAddressTests extends TestBase {
 
     @Test
     public void testAddNewAddress() {
-        app.getNavigationHelper().goToHomePage();
-        List<AddressData> before = app.getContactHelper().getContactList();
+        app.goTo().homePage();
+        List<AddressData> before = app.contact().list();
 
-        app.getNavigationHelper().goToAddNewAddressPage();
+        app.goTo().addressPage();
         AddressData contact = new AddressData("first name test", "last name test");
-        app.getContactHelper().fillAddressForm(contact);
-        app.getContactHelper().submitContactAdding();
-        app.getNavigationHelper().goToHomePage();
+        app.contact().fillAddressForm(contact);
+        app.contact().submitContactAdding();
+        app.goTo().homePage();
 
-        List<AddressData> after = app.getContactHelper().getContactList();
+        List<AddressData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() + 1); //compare size of lists
 
         before.add(contact); //add new contact

@@ -11,16 +11,16 @@ public class GroupCreationTests extends TestBase {
 
     @Test
     public void testCreationGroup() {
-        app.getNavigationHelper().goToGroupPage();
-        List<GroupData> before = app.getGroupHelper().getGroupList();
+        app.goTo().groupPage();
+        List<GroupData> before = app.group().list();
 
-        app.getGroupHelper().initGroupCreation();
         GroupData group = new GroupData("test group", "logo", "test comment");
-        app.getGroupHelper().fillGroupForm(group);
-        app.getGroupHelper().submitGroupCreation();
-        app.getGroupHelper().returnToGroupPage();
+        app.group().initGroupCreation();
+        app.group().fillGroupForm(group);
+        app.group().submitGroupCreation();
+        app.group().returnToGroupPage();
 
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> after = app.group().list();
         Assert.assertEquals(after.size(), before.size() + 1); //compare size of lists
 
         before.add(group); //add group which was modified

@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class GroupData {
     private int id;
-    private final String name;
-    private final String header;
-    private final String footer;
+    private String name;
+    private String header;
+    private String footer;
 
     public GroupData(int id, String name, String header, String footer) {
         this.id = id;
@@ -36,6 +36,23 @@ public class GroupData {
 
     public String getFooter() {
         return footer;
+    }
+
+    public GroupData setId(int id) { //метод будет возвращать тот самый объект в котором он вызван и зачем?
+        this.id = id;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public void setFooter(String footer) {
+        this.footer = footer;
     }
 
     @Override

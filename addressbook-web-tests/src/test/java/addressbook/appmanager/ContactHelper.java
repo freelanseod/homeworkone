@@ -59,7 +59,7 @@ public class ContactHelper extends BaseHelper {
         click(By.linkText("home"));
     }
 
-    public List<AddressData> getContactList(){
+    public List<AddressData> list() {
         List<AddressData> contacts = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {

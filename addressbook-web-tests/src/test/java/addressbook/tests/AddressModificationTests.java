@@ -2,6 +2,7 @@ package addressbook.tests;
 
 import addressbook.model.AddressData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -9,21 +10,25 @@ import java.util.List;
 
 public class AddressModificationTests extends TestBase {
 
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().addressPage();
+        if (app.contact().list().size() == 0) {
+            app.contact().createContact();
+        }
+    }
+
     @Test
     public void testAddressModification() {
-        app.getNavigationHelper().goToAddNewAddressPage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact();
-        }
-        List<AddressData> before = app.getContactHelper().getContactList();
+        List<AddressData> before = app.contact().list();
 
-        app.getContactHelper().submitContactEditing(before.size() - 1);
+        app.contact().submitContactEditing(before.size() - 1);
         AddressData contact = new AddressData("first name test", "last name test");
-        app.getContactHelper().fillAddressForm(contact);
-        app.getContactHelper().submitContactUpdate();
-        app.getNavigationHelper().goToHomePage();
+        app.contact().fillAddressForm(contact);
+        app.contact().submitContactUpdate();
+        app.goTo().homePage();
 
-        List<AddressData> after = app.getContactHelper().getContactList();
+        List<AddressData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size()); //compare size of lists
 
         before.remove(before.size() - 1);
