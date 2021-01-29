@@ -15,7 +15,7 @@ public class AddNewAddressTests extends TestBase {
         List<AddressData> before = app.contact().list();
 
         app.goTo().addressPage();
-        AddressData contact = new AddressData("first name test", "last name test");
+        AddressData contact = new AddressData().withFirstname("first name test").withLastname("last name test");
         app.contact().fillAddressForm(contact);
         app.contact().submitContactAdding();
         app.goTo().homePage();

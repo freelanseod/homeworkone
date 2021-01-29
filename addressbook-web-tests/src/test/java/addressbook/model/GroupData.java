@@ -3,24 +3,24 @@ package addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-    private int id;
+    private int id = Integer.MAX_VALUE;
     private String name;
     private String header;
     private String footer;
 
-    public GroupData(int id, String name, String header, String footer) {
-        this.id = id;
-        this.name = name;
-        this.header = header;
-        this.footer = footer;
-    }
-
-    public GroupData(String name, String header, String footer) {
-        this.id = Integer.MAX_VALUE;
-        this.name = name;
-        this.header = header;
-        this.footer = footer;
-    }
+//    public GroupData(int id, String name, String header, String footer) {
+//        this.id = id;
+//        this.name = name;
+//        this.header = header;
+//        this.footer = footer;
+//    }
+//
+//    public GroupData(String name, String header, String footer) {
+//        this.id = Integer.MAX_VALUE;
+//        this.name = name;
+//        this.header = header;
+//        this.footer = footer;
+//    }
 
     public int getId() {
         return id;
@@ -38,21 +38,24 @@ public class GroupData {
         return footer;
     }
 
-    public GroupData setId(int id) { //метод будет возвращать тот самый объект в котором он вызван и зачем?
+    public GroupData withId(int id) { //pattern builder with..
         this.id = id;
         return this;
     }
 
-    public void setName(String name) {
+    public GroupData withName(String name) {
         this.name = name;
+        return this;
     }
 
-    public void setHeader(String header) {
+    public GroupData withHeader(String header) {
         this.header = header;
+        return this;
     }
 
-    public void setFooter(String footer) {
+    public GroupData withFooter(String footer) {
         this.footer = footer;
+        return this;
     }
 
     @Override

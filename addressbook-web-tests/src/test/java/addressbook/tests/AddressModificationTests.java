@@ -23,7 +23,7 @@ public class AddressModificationTests extends TestBase {
         List<AddressData> before = app.contact().list();
 
         app.contact().submitContactEditing(before.size() - 1);
-        AddressData contact = new AddressData("first name test", "last name test");
+        AddressData contact = new AddressData().withFirstname("first name test").withLastname("last name test");
         app.contact().fillAddressForm(contact);
         app.contact().submitContactUpdate();
         app.goTo().homePage();

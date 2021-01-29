@@ -54,7 +54,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void createContact() {
-        fillAddressForm(new AddressData("first name test", "middle name test", "last name test", "nickname test", "test company"));
+        fillAddressForm(new AddressData().withFirstname("first name test").withMiddlename("middle name test").withLastname("last name test").withNickname("nickname test").withCompany("test company"));
         submitContactAdding();
         click(By.linkText("home"));
     }
@@ -66,8 +66,7 @@ public class ContactHelper extends BaseHelper {
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.name("selected[]")).getAttribute("value"));
-            AddressData contact = new AddressData(id, firstname, lastname);
-            contacts.add(contact);
+            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
         return contacts;
     }
