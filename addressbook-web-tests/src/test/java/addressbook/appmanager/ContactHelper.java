@@ -26,7 +26,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectContact(int index) {
-        wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[1]")).get(index).click();
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void submitContactDeletion() {
@@ -41,8 +41,8 @@ public class ContactHelper extends BaseHelper {
         click(By.id("MassCB"));
     }
 
-    public void submitContactEditing() {
-        click(By.xpath("//img[@alt='Edit']"));
+    public void submitContactEditing(int index) {
+        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
     }
 
     public void submitContactUpdate() {
