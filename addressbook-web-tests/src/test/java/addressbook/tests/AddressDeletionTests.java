@@ -1,48 +1,45 @@
 package addressbook.tests;
 
 import addressbook.model.AddressData;
+import addressbook.model.Addresses;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddressDeletionTests extends TestBase {
 
+    @BeforeTest
+    public void ensurePreconditions() {
+        app.goTo().homePage();
+        if (app.contact().all().size() == 0) {
+            app.goTo().addressPage();
+            app.contact().createContact();
+            app.goTo().homePage();
+        }
+    }
+
     @Test
     public void testDeleteAddress() {
-        app.getNavigationHelper().goToHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().goToAddNewAddressPage();
-            app.getContactHelper().createContact();
-        }
-        List<AddressData> before = app.getContactHelper().getContactList();
+        Addresses before = app.contact().all();
+        AddressData deleteContact = before.iterator().next();
 
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().submitContactDeletion();
-        app.getContactHelper().agreeContactDeletion();
-        app.getNavigationHelper().goToHomePage();
+        app.contact().delete(deleteContact);
 
-        List<AddressData> after = app.getContactHelper().getContactList();
+        Addresses after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() - 1); //compare size of lists
 
-        before.remove(before.size() - 1); //delete from List<GroupData> before
-        Assert.assertEquals(before, after);
+        before.without(deleteContact);
+        assertThat(after, equalTo(before.without(deleteContact)));
     }
 
     @Test
     public void testDeleteAllAddresses() {
-        app.getNavigationHelper().goToHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().goToAddNewAddressPage();
-            app.getContactHelper().createContact();
-        }
+        app.contact().deleteAllAddresses();
 
-        app.getContactHelper().selectAllContacts();
-        app.getContactHelper().submitContactDeletion();
-        app.getContactHelper().agreeContactDeletion();
-        app.getNavigationHelper().goToHomePage();
-
-        List<AddressData> result = app.getContactHelper().getContactList();
+        Addresses result = app.contact().all();
         Assert.assertEquals(result.size(), 0); //compare size of lists
     }
 

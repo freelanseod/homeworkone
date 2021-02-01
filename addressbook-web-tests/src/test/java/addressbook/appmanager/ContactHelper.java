@@ -1,12 +1,15 @@
 package addressbook.appmanager;
 
 import addressbook.model.AddressData;
+import addressbook.model.Addresses;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
     public ContactHelper(WebDriver wd) {
@@ -29,6 +32,10 @@ public class ContactHelper extends BaseHelper {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
     public void submitContactDeletion() {
         click(By.xpath("//input[@value='Delete']"));
     }
@@ -45,6 +52,10 @@ public class ContactHelper extends BaseHelper {
         wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
     }
 
+    public void submitContactEditingById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).findElement(By.xpath("//img[@alt='Edit']")).click();
+    }
+
     public void submitContactUpdate() {
         click(By.name("update"));
     }
@@ -54,20 +65,75 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void createContact() {
-        fillAddressForm(new AddressData("first name test", "middle name test", "last name test", "nickname test", "test company"));
+        fillAddressForm(new AddressData().withFirstname("first name test").withMiddlename("middle name test").withLastname("last name test").withNickname("nickname test").withCompany("test company"));
         submitContactAdding();
         click(By.linkText("home"));
     }
 
-    public List<AddressData> getContactList(){
+    public void modify(AddressData contact) {
+        submitContactEditingById(contact.getId());
+        fillAddressForm(contact);
+        submitContactUpdate();
+        returnToHomePage();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        submitContactDeletion();
+        agreeContactDeletion();
+        returnToHomePage();
+    }
+
+    public void delete(AddressData addressData) {
+        selectContactById(addressData.getId());
+        submitContactDeletion();
+        agreeContactDeletion();
+        returnToHomePage();
+    }
+
+    public void deleteAllAddresses() {
+        selectAllContacts();
+        submitContactDeletion();
+        agreeContactDeletion();
+        returnToHomePage();
+    }
+
+    public void returnToHomePage() {
+        click(By.linkText("home"));
+    }
+
+    public List<AddressData> list() {
         List<AddressData> contacts = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.name("selected[]")).getAttribute("value"));
-            AddressData contact = new AddressData(id, firstname, lastname);
-            contacts.add(contact);
+            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
+        }
+        return contacts;
+    }
+
+    public Set<AddressData> allSet() {
+        Set<AddressData> contacts = new HashSet<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+            String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+            int id = Integer.parseInt(element.findElement(By.name("selected[]")).getAttribute("value"));
+            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
+        }
+        return contacts;
+    }
+
+    public Addresses all() {
+        Addresses contacts = new Addresses();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+            String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+            int id = Integer.parseInt(element.findElement(By.name("selected[]")).getAttribute("value"));
+            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
         return contacts;
     }

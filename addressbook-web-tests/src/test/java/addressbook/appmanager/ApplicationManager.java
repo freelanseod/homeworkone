@@ -25,14 +25,14 @@ public class ApplicationManager {
     public void init() {
         if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
-        } else if (browser.equals(BrowserType.CHROME))  {
+        } else if (browser.equals(BrowserType.CHROME)) {
             wd = new ChromeDriver();
         } else {
             System.out.println("Unknown browser type");
         }
 
         wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook/group.php?new=New+group");
+        wd.get("http://localhost/addressbook/index.php");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
@@ -58,15 +58,15 @@ public class ApplicationManager {
         }
     }
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() {
         return groupHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 
