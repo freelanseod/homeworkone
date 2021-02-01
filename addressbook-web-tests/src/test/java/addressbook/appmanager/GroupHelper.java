@@ -62,6 +62,7 @@ public class GroupHelper extends BaseHelper {
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -70,6 +71,7 @@ public class GroupHelper extends BaseHelper {
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -82,8 +84,11 @@ public class GroupHelper extends BaseHelper {
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deleteSelectedGroup();
+        groupCache = null;
         returnToGroupPage();
     }
+
+    private Groups groupCache = null;
 
     public List<GroupData> list() {
         List<GroupData> groups = new ArrayList<>();
@@ -108,14 +113,17 @@ public class GroupHelper extends BaseHelper {
     }
 
     public Groups all() {
-        Groups groups = new Groups();
+        if (groupCache != null) {
+            return new Groups(groupCache); //return copy of cache
+        }
+        groupCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")); //<input value="51">
             String name = element.getText(); //take title
-            groups.add(new GroupData().withId(id).withName(name));
+            groupCache.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        return new Groups(groupCache);
     }
 
 }

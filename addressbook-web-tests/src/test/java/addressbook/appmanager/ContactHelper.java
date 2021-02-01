@@ -67,13 +67,15 @@ public class ContactHelper extends BaseHelper {
     public void createContact() {
         fillAddressForm(new AddressData().withFirstname("first name test").withMiddlename("middle name test").withLastname("last name test").withNickname("nickname test").withCompany("test company"));
         submitContactAdding();
-        click(By.linkText("home"));
+        addressCache = null;
+        returnToHomePage();
     }
 
     public void modify(AddressData contact) {
         submitContactEditingById(contact.getId());
         fillAddressForm(contact);
         submitContactUpdate();
+        addressCache = null;
         returnToHomePage();
     }
 
@@ -88,6 +90,7 @@ public class ContactHelper extends BaseHelper {
         selectContactById(addressData.getId());
         submitContactDeletion();
         agreeContactDeletion();
+        addressCache = null;
         returnToHomePage();
     }
 
@@ -95,12 +98,15 @@ public class ContactHelper extends BaseHelper {
         selectAllContacts();
         submitContactDeletion();
         agreeContactDeletion();
+        addressCache = null;
         returnToHomePage();
     }
 
     public void returnToHomePage() {
         click(By.linkText("home"));
     }
+
+    private Addresses addressCache = null;
 
     public List<AddressData> list() {
         List<AddressData> contacts = new ArrayList<>();
@@ -127,15 +133,18 @@ public class ContactHelper extends BaseHelper {
     }
 
     public Addresses all() {
-        Addresses contacts = new Addresses();
+        if (addressCache != null) {
+            return new Addresses(addressCache);
+        }
+        addressCache = new Addresses();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.name("selected[]")).getAttribute("value"));
-            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
+            addressCache.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
-        return contacts;
+        return new Addresses(addressCache);
     }
 
 }
