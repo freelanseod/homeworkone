@@ -10,27 +10,6 @@ public class AddressData {
     private String nickname;
     private String company;
 
-//    public AddressData(String firstname, String middlename, String lastname, String nickname, String company) {
-//        this.id =
-//        this.firstname = firstname;
-//        this.middlename = middlename;
-//        this.lastname = lastname;
-//        this.nickname = nickname;
-//        this.company = company;
-//    }
-//
-//    public AddressData(String firstname, String lastname) {
-//        this.id = Integer.MAX_VALUE;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//    }
-//
-//    public AddressData(int id, String firstname, String lastname) {
-//        this.id = id;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//    }
-
     public String getFirstname() {
         return firstname;
     }
@@ -99,12 +78,12 @@ public class AddressData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AddressData that = (AddressData) o;
-        return Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstname, lastname);
+        return Objects.hash(id, firstname, lastname);
     }
 
 }

@@ -1,36 +1,30 @@
 package addressbook.tests;
 
 import addressbook.model.GroupData;
-import org.testng.Assert;
+import addressbook.model.Groups;
 import org.testng.annotations.*;
 
-import java.util.Comparator;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
     @Test
     public void testCreationGroup() {
         app.goTo().groupPage();
-        List<GroupData> before = app.group().list();
+        Groups before = app.group().all();
 
-//        GroupData group = new GroupData("test group", "logo", "test comment");
         GroupData group = new GroupData().withName("test group").withHeader("test header").withFooter("test footer");
         app.group().initGroupCreation();
         app.group().fillGroupForm(group);
         app.group().submitGroupCreation();
         app.group().returnToGroupPage();
 
-        List<GroupData> after = app.group().list();
-        Assert.assertEquals(after.size(), before.size() + 1); //compare size of lists
+        Groups after = app.group().all();
+        assertThat(after.size(), equalTo(before.size() + 1));
 
-        before.add(group); //add group which was modified
-
-        Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId()); //anon function
-        before.sort(byId);
-        after.sort(byId);
-
-        Assert.assertEquals(before, after);
+        GroupData index = group.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()); //anon function get id from stream of groups set and find max id
+        assertThat(after, equalTo(before.withAdded(index))); //hamcrest works with fluent interfaces
     }
 
 }

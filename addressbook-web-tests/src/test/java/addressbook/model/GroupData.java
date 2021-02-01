@@ -8,20 +8,6 @@ public class GroupData {
     private String header;
     private String footer;
 
-//    public GroupData(int id, String name, String header, String footer) {
-//        this.id = id;
-//        this.name = name;
-//        this.header = header;
-//        this.footer = footer;
-//    }
-//
-//    public GroupData(String name, String header, String footer) {
-//        this.id = Integer.MAX_VALUE;
-//        this.name = name;
-//        this.header = header;
-//        this.footer = footer;
-//    }
-
     public int getId() {
         return id;
     }
@@ -38,7 +24,7 @@ public class GroupData {
         return footer;
     }
 
-    public GroupData withId(int id) { //pattern builder with..
+    public GroupData withId(int id) { //pattern builder with..method
         this.id = id;
         return this;
     }
@@ -71,12 +57,12 @@ public class GroupData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
-        return Objects.equals(name, groupData.name);
+        return id == groupData.id && Objects.equals(name, groupData.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id, name);
     }
 
 }

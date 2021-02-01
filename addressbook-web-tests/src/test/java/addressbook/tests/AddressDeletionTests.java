@@ -1,18 +1,20 @@
 package addressbook.tests;
 
 import addressbook.model.AddressData;
+import addressbook.model.Addresses;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddressDeletionTests extends TestBase {
 
     @BeforeTest
     public void ensurePreconditions() {
         app.goTo().homePage();
-        if (app.contact().list().size() == 0) {
+        if (app.contact().all().size() == 0) {
             app.goTo().addressPage();
             app.contact().createContact();
             app.goTo().homePage();
@@ -21,29 +23,23 @@ public class AddressDeletionTests extends TestBase {
 
     @Test
     public void testDeleteAddress() {
-        List<AddressData> before = app.contact().list();
+        Addresses before = app.contact().all();
+        AddressData deleteContact = before.iterator().next();
 
-        int index = before.size() - 1;
-        app.contact().selectContact(index);
-        app.contact().submitContactDeletion();
-        app.contact().agreeContactDeletion();
-        app.goTo().homePage();
+        app.contact().delete(deleteContact);
 
-        List<AddressData> after = app.contact().list();
+        Addresses after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() - 1); //compare size of lists
 
-        before.remove(index); //delete from List<GroupData> before
-        Assert.assertEquals(before, after);
+        before.without(deleteContact);
+        assertThat(after, equalTo(before.without(deleteContact)));
     }
 
     @Test
     public void testDeleteAllAddresses() {
-        app.contact().selectAllContacts();
-        app.contact().submitContactDeletion();
-        app.contact().agreeContactDeletion();
-        app.goTo().homePage();
+        app.contact().deleteAllAddresses();
 
-        List<AddressData> result = app.contact().list();
+        Addresses result = app.contact().all();
         Assert.assertEquals(result.size(), 0); //compare size of lists
     }
 
