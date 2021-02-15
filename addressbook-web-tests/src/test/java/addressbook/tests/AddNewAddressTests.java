@@ -14,10 +14,12 @@ public class AddNewAddressTests extends TestBase {
     public void testAddNewAddress() {
         app.goTo().homePage();
         Addresses before = app.contact().all();
-
-        AddressData contact = new AddressData().withFirstname("first name test").withLastname("last name test");
         app.goTo().addressPage();
-        app.contact().fillAddressForm(contact);
+
+        AddressData contact = new AddressData()
+                .withFirstname("first name test").withLastname("last name test").withHomePhone("+79780230000").withMobilePhone("+79780991122").withWorkPhone("+79785227700").withEmail("f@mail.ru").withEmail2("s@mail.ru").withEmail3("t@mail.ru");
+
+        app.contact().fillAddressFormWithAllFields(contact);
         app.contact().submitContactAdding();
         app.goTo().homePage();
 

@@ -13,9 +13,11 @@ public class AddressModificationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().addressPage();
+        app.goTo().homePage();
         if (app.contact().all().size() == 0) {
-            app.contact().createContact();
+            app.goTo().addressPage();
+            app.contact().createContactAllFields();
+            app.goTo().homePage();
         }
     }
 
@@ -25,7 +27,8 @@ public class AddressModificationTests extends TestBase {
         AddressData modifiedContact = before.iterator().next();
 
         AddressData contact = new AddressData()
-                .withId(modifiedContact.getId()).withFirstname("first name test").withLastname("last name test");
+                .withId(modifiedContact.getId()).withFirstname("first name test").withLastname("last name test").withHomePhone("89001112233").withWorkPhone("8009224400")
+                .withMobilePhone("89718882266").withEmail("mod@mail.ru").withEmail2("mod2@mail.ru").withEmail3("mod3@mail.ru");
 
         app.contact().modify(contact);
 
