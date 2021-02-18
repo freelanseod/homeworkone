@@ -28,6 +28,17 @@ public class ContactHelper extends BaseHelper {
         type(By.name("company"), addressData.getCompany());
     }
 
+    public void fillAddressFormWithAllFields(AddressData addressData) {
+        type(By.name("firstname"), addressData.getFirstname());
+        type(By.name("lastname"), addressData.getLastname());
+        type(By.name("home"), addressData.getHomePhone());
+        type(By.name("mobile"), addressData.getMobilePhone());
+        type(By.name("work"), addressData.getWorkPhone());
+        type(By.name("email"), addressData.getEmail());
+        type(By.name("email2"), addressData.getEmail2());
+        type(By.name("email3"), addressData.getEmail3());
+    }
+
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
@@ -66,6 +77,19 @@ public class ContactHelper extends BaseHelper {
 
     public void createContact() {
         fillAddressForm(new AddressData().withFirstname("first name test").withMiddlename("middle name test").withLastname("last name test").withNickname("nickname test").withCompany("test company"));
+        submitContactAdding();
+        click(By.linkText("home"));
+    }
+
+    public void createContactWithPhone() {
+        fillAddressFormWithAllFields(new AddressData().withFirstname("first name test").withLastname("last name test").withHomePhone("+79780000000").withMobilePhone("+79880000000").withWorkPhone("+79340000000"));
+        submitContactAdding();
+        click(By.linkText("home"));
+    }
+
+    public void createContactAllFields() {
+        fillAddressFormWithAllFields(new AddressData().withFirstname("first name test").withLastname("last name test").withPostAddress("99345 post test street").withHomePhone("+79780000000")
+                .withMobilePhone("+79880000000").withWorkPhone("+79340000000").withEmail("one@mail.ru").withEmail2("two@mail.ru").withEmail3("three@mail.ru"));
         submitContactAdding();
         click(By.linkText("home"));
     }
@@ -126,6 +150,37 @@ public class ContactHelper extends BaseHelper {
         return contacts;
     }
 
+    public Set<AddressData> allWithPhones() {
+        Set<AddressData> contacts = new HashSet<>();
+        List<WebElement> rows = wd.findElements(By.name("entry"));
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            String lastname = cells.get(1).getText();
+            String firstname = cells.get(2).getText();
+            String allPhones = cells.get(5).getText();
+            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname)
+                    .withAllPhones(allPhones));
+        }
+        return contacts;
+    }
+
+    public Set<AddressData> allContacts() {
+        Set<AddressData> contacts = new HashSet<>();
+        List<WebElement> rows = wd.findElements(By.name("entry"));
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            String lastname = cells.get(1).getText();
+            String firstname = cells.get(2).getText();
+            String address = cells.get(3).getText();
+            String allEmails = cells.get(4).getText();
+            contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname)
+                    .withPostAddress(address).withAllEmails(allEmails));
+        }
+        return contacts;
+    }
+
     public Addresses all() {
         Addresses contacts = new Addresses();
         List<WebElement> elements = wd.findElements(By.name("entry"));
@@ -136,6 +191,36 @@ public class ContactHelper extends BaseHelper {
             contacts.add(new AddressData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
         return contacts;
+    }
+
+    public AddressData infoFromEditForm(AddressData contact) {
+        initAddressModificationById(contact.getId());
+        String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        String postAddress = wd.findElement(By.name("address")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+        wd.navigate().back();
+
+        return new AddressData().withId(contact.getId()).withFirstname(firstName).withLastname(lastName).withHomePhone(home).withMobilePhone(mobile)
+                .withWorkPhone(work).withPostAddress(postAddress).withEmail(email).withEmail2(email2).withEmail3(email3);
+    }
+
+    private void initAddressModificationById(int id) { //choose contact by id
+        //метод последовательных приближений = метод итераций
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id))); //find checkbox
+        WebElement row = checkbox.findElement(By.xpath("./../..")); //rise up to class entry
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click(); //find and click on edit button
+
+        //more versions
+        //wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
+        //wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
+        //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
 }
