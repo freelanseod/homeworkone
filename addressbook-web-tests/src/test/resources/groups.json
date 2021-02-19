@@ -13,15 +13,5 @@
     "name": "generator name 2",
     "header": "generator header 2",
     "footer": "generator footer 2"
-  },
-  {
-    "name": "generator name 3",
-    "header": "generator header 3",
-    "footer": "generator footer 3"
-  },
-  {
-    "name": "generator name 4",
-    "header": "generator header 4",
-    "footer": "generator footer 4"
   }
 ]

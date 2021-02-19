@@ -38,30 +38,4 @@
     <email2>email22@mail.ru</email2>
     <email3>email32@mail.ru</email3>
   </addressbook.model.AddressData>
-  <addressbook.model.AddressData>
-    <id>2147483647</id>
-    <firstname>generator name 3</firstname>
-    <lastname>generator last name 3</lastname>
-    <company>generator company 3</company>
-    <home>+79780991233</home>
-    <mobile>+79780991243</mobile>
-    <work>+79780991253</work>
-    <postAddress>generator post address 3</postAddress>
-    <email>email3@mail.ru</email>
-    <email2>email23@mail.ru</email2>
-    <email3>email33@mail.ru</email3>
-  </addressbook.model.AddressData>
-  <addressbook.model.AddressData>
-    <id>2147483647</id>
-    <firstname>generator name 4</firstname>
-    <lastname>generator last name 4</lastname>
-    <company>generator company 4</company>
-    <home>+79780991234</home>
-    <mobile>+79780991244</mobile>
-    <work>+79780991254</work>
-    <postAddress>generator post address 4</postAddress>
-    <email>email4@mail.ru</email>
-    <email2>email24@mail.ru</email2>
-    <email3>email34@mail.ru</email3>
-  </addressbook.model.AddressData>
 </list>
