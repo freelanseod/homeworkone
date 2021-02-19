@@ -1,0 +1,67 @@
+<list>
+  <addressbook.model.AddressData>
+    <id>2147483647</id>
+    <firstname>generator name 0</firstname>
+    <lastname>generator last name 0</lastname>
+    <company>generator company 0</company>
+    <home>+79780991230</home>
+    <mobile>+79780991240</mobile>
+    <work>+79780991250</work>
+    <postAddress>generator post address 0</postAddress>
+    <email>email0@mail.ru</email>
+    <email2>email20@mail.ru</email2>
+    <email3>email30@mail.ru</email3>
+  </addressbook.model.AddressData>
+  <addressbook.model.AddressData>
+    <id>2147483647</id>
+    <firstname>generator name 1</firstname>
+    <lastname>generator last name 1</lastname>
+    <company>generator company 1</company>
+    <home>+79780991231</home>
+    <mobile>+79780991241</mobile>
+    <work>+79780991251</work>
+    <postAddress>generator post address 1</postAddress>
+    <email>email1@mail.ru</email>
+    <email2>email21@mail.ru</email2>
+    <email3>email31@mail.ru</email3>
+  </addressbook.model.AddressData>
+  <addressbook.model.AddressData>
+    <id>2147483647</id>
+    <firstname>generator name 2</firstname>
+    <lastname>generator last name 2</lastname>
+    <company>generator company 2</company>
+    <home>+79780991232</home>
+    <mobile>+79780991242</mobile>
+    <work>+79780991252</work>
+    <postAddress>generator post address 2</postAddress>
+    <email>email2@mail.ru</email>
+    <email2>email22@mail.ru</email2>
+    <email3>email32@mail.ru</email3>
+  </addressbook.model.AddressData>
+  <addressbook.model.AddressData>
+    <id>2147483647</id>
+    <firstname>generator name 3</firstname>
+    <lastname>generator last name 3</lastname>
+    <company>generator company 3</company>
+    <home>+79780991233</home>
+    <mobile>+79780991243</mobile>
+    <work>+79780991253</work>
+    <postAddress>generator post address 3</postAddress>
+    <email>email3@mail.ru</email>
+    <email2>email23@mail.ru</email2>
+    <email3>email33@mail.ru</email3>
+  </addressbook.model.AddressData>
+  <addressbook.model.AddressData>
+    <id>2147483647</id>
+    <firstname>generator name 4</firstname>
+    <lastname>generator last name 4</lastname>
+    <company>generator company 4</company>
+    <home>+79780991234</home>
+    <mobile>+79780991244</mobile>
+    <work>+79780991254</work>
+    <postAddress>generator post address 4</postAddress>
+    <email>email4@mail.ru</email>
+    <email2>email24@mail.ru</email2>
+    <email3>email34@mail.ru</email3>
+  </addressbook.model.AddressData>
+</list>

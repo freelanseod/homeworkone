@@ -1,23 +1,42 @@
 package addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
 public class AddressData {
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String firstname;
     private String middlename;
+    @Expose
     private String lastname;
     private String nickname;
+    @Expose
     private String company;
+    @Expose
     private String home;
+    @Expose
     private String mobile;
+    @Expose
     private String work;
     private String allPhones;
+    @Expose
     private String postAddress;
+    @Expose
     private String email;
+    @Expose
     private String email2;
+    @Expose
     private String email3;
     private String allEmails;
+    @Expose
+    private File photo;
 
     public String getFirstname() {
         return firstname;
@@ -77,6 +96,10 @@ public class AddressData {
 
     public String getAllEmails() {
         return allEmails;
+    }
+
+    public File getPhoto() {
+        return photo;
     }
 
     public AddressData withId(int id) {
@@ -151,6 +174,11 @@ public class AddressData {
 
     public AddressData withAllEmails(String allEmails) {
         this.allEmails = allEmails;
+        return this;
+    }
+
+    public AddressData withPhoto(File photo) {
+        this.photo = photo;
         return this;
     }
 

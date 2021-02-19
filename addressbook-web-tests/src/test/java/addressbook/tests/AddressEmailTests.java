@@ -1,7 +1,7 @@
 package addressbook.tests;
 
 import addressbook.model.AddressData;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddressEmailTests extends TestBase {
 
-    @BeforeMethod
+    @BeforeClass
     public void ensurePreconditions() {
         app.goTo().homePage();
         if (app.contact().all().size() == 0) {
