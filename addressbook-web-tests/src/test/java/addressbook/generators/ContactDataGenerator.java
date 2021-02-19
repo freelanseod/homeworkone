@@ -1,5 +1,6 @@
 package addressbook.generators;
 
+import addressbook.model.AddressData;
 import addressbook.model.GroupData;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
@@ -15,8 +16,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupDataGenerator {
-    @Parameter(names = "-c", description = "Group count")
+public class ContactDataGenerator {
+    @Parameter(names = "-c", description = "Address count")
     public int count;
 
     @Parameter (names = "-f", description = "Target file")
@@ -26,7 +27,7 @@ public class GroupDataGenerator {
     public String format;
 
     public static void main(String[] args) throws IOException {
-        GroupDataGenerator generator = new GroupDataGenerator();
+        ContactDataGenerator generator = new ContactDataGenerator();
         JCommander jCommander = new JCommander(generator);
         try {
             jCommander.parse(args);
@@ -38,49 +39,40 @@ public class GroupDataGenerator {
     }
 
     private void run() throws IOException {
-        List<GroupData> groups = generateGroups(count);
-        if (format.equals("csv")) {
-            saveAsCsv(groups, new File(file));
-        } else if (format.equals("xml")) {
-            saveAsXml(groups, new File(file));
+        List<AddressData> addresses = generateContacts(count);
+        if (format.equals("xml")) {
+            saveAsXml(addresses, new File(file));
         } else if (format.equals("json")) {
-            saveAsJson(groups, new File(file));
+            saveAsJson(addresses, new File(file));
         } else {
             System.out.println("Unrecognized format " + format);
         }
     }
 
-    private void saveAsJson(List<GroupData> groups, File file) throws IOException {
+    private void saveAsJson(List<AddressData> addresses, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
-        String json = gson.toJson(groups);
+        String json = gson.toJson(addresses);
         Writer writer = new FileWriter(file);
         writer.write(json);
         writer.close();
     }
 
-    private void saveAsXml(List<GroupData> groups, File file) throws IOException {
+    private void saveAsXml(List<AddressData> addresses, File file) throws IOException {
         XStream xStream = new XStream();
         xStream.processAnnotations(GroupData.class);
-        String xml = xStream.toXML(groups);
+        String xml = xStream.toXML(addresses);
         Writer writer = new FileWriter(file);
         writer.write(xml);
         writer.close();
     }
 
-    private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for (GroupData group : groups) {
-            writer.write(String.format("%s;%s;%s\n", group.getName(), group.getFooter(), group.getHeader()));
-        }
-        writer.close();
-    }
-
-    private List<GroupData> generateGroups(int count) {
-        List<GroupData> groups = new ArrayList<>();
+    private List<AddressData> generateContacts(int count) {
+        List<AddressData> addresses = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            groups.add(new GroupData().withName(String.format("generator name %s", i)).withFooter(String.format("generator footer %s", i)).withHeader(String.format("generator header %s", i)));
+            addresses.add(new AddressData().withFirstname(String.format("generator name %s", i)).withLastname(String.format("generator last name %s", i)).withCompany(String.format("generator company %s", i)).withHomePhone(String.format("+7978099123%s", i)).withMobilePhone(String.format("+7978099124%s", i))
+                    .withWorkPhone(String.format("+7978099125%s", i)).withPostAddress(String.format("generator post address %s", i)).withEmail(String.format("email%s@mail.ru", i)).withEmail2(String.format("email2%s@mail.ru", i)).withEmail3(String.format("email3%s@mail.ru", i)));
         }
-        return groups;
+        return addresses;
     }
 
 }
