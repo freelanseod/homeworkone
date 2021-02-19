@@ -1,0 +1,27 @@
+<list>
+  <group>
+    <name>generator name 0</name>
+    <header>generator header 0</header>
+    <footer>generator footer 0</footer>
+  </group>
+  <group>
+    <name>generator name 1</name>
+    <header>generator header 1</header>
+    <footer>generator footer 1</footer>
+  </group>
+  <group>
+    <name>generator name 2</name>
+    <header>generator header 2</header>
+    <footer>generator footer 2</footer>
+  </group>
+  <group>
+    <name>generator name 3</name>
+    <header>generator header 3</header>
+    <footer>generator footer 3</footer>
+  </group>
+  <group>
+    <name>generator name 4</name>
+    <header>generator header 4</header>
+    <footer>generator footer 4</footer>
+  </group>
+</list>
