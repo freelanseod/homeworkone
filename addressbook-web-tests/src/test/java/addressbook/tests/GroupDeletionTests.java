@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupDeletionTests extends TestBase {
 
-    @BeforeMethod
+    @BeforeClass
     public void ensurePreconditions() {
         app.goTo().groupPage();
         if (app.group().all().size() == 0) {

@@ -3,7 +3,7 @@ package addressbook.tests;
 import addressbook.model.AddressData;
 import addressbook.model.Addresses;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddressModificationTests extends TestBase {
 
-    @BeforeMethod
+    @BeforeClass
     public void ensurePreconditions() {
         app.goTo().homePage();
         if (app.contact().all().size() == 0) {

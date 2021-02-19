@@ -31,6 +31,7 @@ public class ContactHelper extends BaseHelper {
     public void fillAddressFormWithAllFields(AddressData addressData) {
         type(By.name("firstname"), addressData.getFirstname());
         type(By.name("lastname"), addressData.getLastname());
+        attach(By.name("photo"), addressData.getPhoto());
         type(By.name("home"), addressData.getHomePhone());
         type(By.name("mobile"), addressData.getMobilePhone());
         type(By.name("work"), addressData.getWorkPhone());

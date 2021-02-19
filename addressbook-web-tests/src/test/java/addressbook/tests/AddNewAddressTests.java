@@ -5,6 +5,8 @@ import addressbook.model.Addresses;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -16,8 +18,9 @@ public class AddNewAddressTests extends TestBase {
         Addresses before = app.contact().all();
         app.goTo().addressPage();
 
-        AddressData contact = new AddressData()
-                .withFirstname("first name test").withLastname("last name test").withHomePhone("+79780230000").withMobilePhone("+79780991122").withWorkPhone("+79785227700").withEmail("f@mail.ru").withEmail2("s@mail.ru").withEmail3("t@mail.ru");
+        File photo = new File("src/test/resources/od.jpg");
+        AddressData contact = new AddressData().withFirstname("first name test").withLastname("last name test").withHomePhone("+79780230000").withMobilePhone("+79780991122").withWorkPhone("+79785227700")
+                .withEmail("f@mail.ru").withEmail2("s@mail.ru").withEmail3("t@mail.ru").withPhoto(photo);
 
         app.contact().fillAddressFormWithAllFields(contact);
         app.contact().submitContactAdding();
