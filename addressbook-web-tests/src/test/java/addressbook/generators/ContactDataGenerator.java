@@ -52,18 +52,24 @@ public class ContactDataGenerator {
     private void saveAsJson(List<AddressData> addresses, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(addresses);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
+
+
+      //  writer.close();
     }
 
     private void saveAsXml(List<AddressData> addresses, File file) throws IOException {
         XStream xStream = new XStream();
         xStream.processAnnotations(GroupData.class);
         String xml = xStream.toXML(addresses);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
+
+
+        //writer.close();
     }
 
     private List<AddressData> generateContacts(int count) {
