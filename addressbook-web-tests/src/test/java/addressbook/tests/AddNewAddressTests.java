@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,37 +24,36 @@ public class AddNewAddressTests extends TestBase {
     //iterator of arrays of objects
     @DataProvider
     public Iterator<Object[]> validAddressesFromXml() throws IOException {
-        List<Object[]> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/addresses.xml"));
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/addresses.xml"))) {
+            String xml = "";
+            String line = reader.readLine();
+            while (line != null) {
+                xml += line;
+                line = reader.readLine();
+            }
+            XStream xStream = new XStream();
+            xStream.processAnnotations(AddressData.class);
+            List<AddressData> groups = (List<AddressData>) xStream.fromXML(xml); //type cast
 
-        String xml = "";
-        String line = reader.readLine();
-        while (line != null) {
-            xml += line;
-            line = reader.readLine();
+            return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
         }
-        XStream xStream = new XStream();
-        xStream.processAnnotations(AddressData.class);
-        List<AddressData> groups = (List<AddressData>) xStream.fromXML(xml); //type cast
-        return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @DataProvider
     public Iterator<Object[]> validAddressesFromJson() throws IOException {
-        List<Object[]> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/addresses.json"));
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/addresses.json"))) {
+            String json = "";
+            String line = reader.readLine();
+            while (line != null) {
+                json += line;
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            //List<AddressData>.class
+            List<AddressData> groups = gson.fromJson(json, new TypeToken<List<AddressData>>(){}.getType());
 
-        String json = "";
-        String line = reader.readLine();
-        while (line != null) {
-            json += line;
-            line = reader.readLine();
+            return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
         }
-        Gson gson = new Gson();
-        //List<AddressData>.class
-        List<AddressData> groups = gson.fromJson(json, new TypeToken<List<AddressData>>(){}.getType());
-
-        return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @Test (dataProvider = "validAddressesFromJson")
