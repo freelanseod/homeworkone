@@ -22,41 +22,5 @@
     "email": "email1@mail.ru",
     "email2": "email21@mail.ru",
     "email3": "email31@mail.ru"
-  },
-  {
-    "firstname": "generator name 2",
-    "lastname": "generator last name 2",
-    "company": "generator company 2",
-    "home": "+79780991232",
-    "mobile": "+79780991242",
-    "work": "+79780991252",
-    "postAddress": "generator post address 2",
-    "email": "email2@mail.ru",
-    "email2": "email22@mail.ru",
-    "email3": "email32@mail.ru"
-  },
-  {
-    "firstname": "generator name 3",
-    "lastname": "generator last name 3",
-    "company": "generator company 3",
-    "home": "+79780991233",
-    "mobile": "+79780991243",
-    "work": "+79780991253",
-    "postAddress": "generator post address 3",
-    "email": "email3@mail.ru",
-    "email2": "email23@mail.ru",
-    "email3": "email33@mail.ru"
-  },
-  {
-    "firstname": "generator name 4",
-    "lastname": "generator last name 4",
-    "company": "generator company 4",
-    "home": "+79780991234",
-    "mobile": "+79780991244",
-    "work": "+79780991254",
-    "postAddress": "generator post address 4",
-    "email": "email4@mail.ru",
-    "email2": "email24@mail.ru",
-    "email3": "email34@mail.ru"
   }
 ]
