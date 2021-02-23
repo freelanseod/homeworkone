@@ -3,40 +3,70 @@ package addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contact")
+@Entity //tied to db hibernate
+@Table(name = "addressbook")
 public class AddressData {
     @XStreamOmitField
+    @Id
     private int id = Integer.MAX_VALUE;
+
     @Expose
     private String firstname;
     private String middlename;
+
     @Expose
     private String lastname;
     private String nickname;
+
     @Expose
     private String company;
+
     @Expose
+    @Type(type = "text")
     private String home;
+
     @Expose
+    @Type(type = "text")
     private String mobile;
+
     @Expose
+    @Type(type = "text")
     private String work;
+
+    @Transient
     private String allPhones;
+
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String postAddress;
+
     @Expose
+    @Type(type = "text")
     private String email;
+
     @Expose
+    @Type(type = "text")
     private String email2;
+
     @Expose
+    @Type(type = "text")
     private String email3;
+
+    @Transient
     private String allEmails;
+
     @Expose
-    private File photo;
+    @Type(type = "text")
+    private String photo;
 
     public String getFirstname() {
         return firstname;
@@ -99,7 +129,7 @@ public class AddressData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public AddressData withId(int id) {
@@ -178,7 +208,7 @@ public class AddressData {
     }
 
     public AddressData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 

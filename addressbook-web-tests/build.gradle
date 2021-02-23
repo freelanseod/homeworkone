@@ -17,6 +17,9 @@ dependencies {
     implementation 'com.thoughtworks.xstream:xstream:1.4.15'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'mysql:mysql-connector-java:8.0.23'
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.28.Final'
+
 }
 
 test {
@@ -46,5 +49,17 @@ task testContacts(type: Test) {
     }
     if (project.hasProperty('target')) {
         systemProperty("target", "${target}")
+    }
+}
+
+task testDb(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
+}
+
+task testHb(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-hb.xml'
     }
 }
