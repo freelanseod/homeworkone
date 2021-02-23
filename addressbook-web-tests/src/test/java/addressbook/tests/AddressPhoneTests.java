@@ -15,7 +15,7 @@ public class AddressPhoneTests extends TestBase {
     @BeforeClass
     public void ensurePreconditions() {
         app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().addresses().size() == 0) {
             app.goTo().addressPage();
             app.contact().createContactAllFields();
             app.goTo().homePage();

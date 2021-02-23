@@ -3,39 +3,69 @@ package addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contact")
+@Entity //tied to db hibernate
+@Table(name = "addressbook")
 public class AddressData {
     @XStreamOmitField
+    @Id
     private int id = Integer.MAX_VALUE;
+
     @Expose
     private String firstname;
     private String middlename;
+
     @Expose
     private String lastname;
     private String nickname;
+
     @Expose
     private String company;
+
     @Expose
+    @Type(type = "text")
     private String home;
+
     @Expose
+    @Type(type = "text")
     private String mobile;
+
     @Expose
+    @Type(type = "text")
     private String work;
+
+    @Transient
     private String allPhones;
+
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String postAddress;
+
     @Expose
+    @Type(type = "text")
     private String email;
+
     @Expose
+    @Type(type = "text")
     private String email2;
+
     @Expose
+    @Type(type = "text")
     private String email3;
+
+    @Transient
     private String allEmails;
+
     @Expose
+    @Transient
     private File photo;
 
     public String getFirstname() {
@@ -183,25 +213,31 @@ public class AddressData {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AddressData that = (AddressData) o;
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(home, that.home) && Objects.equals(mobile, that.mobile) && Objects.equals(work, that.work) && Objects.equals(email, that.email) && Objects.equals(email2, that.email2) && Objects.equals(email3, that.email3);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname, home, mobile, work, email, email2, email3);
+    }
+
+    @Override
     public String toString() {
         return "AddressData{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", home='" + home + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", work='" + work + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AddressData that = (AddressData) o;
-        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
     }
 
 }

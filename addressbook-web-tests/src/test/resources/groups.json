@@ -8,10 +8,5 @@
     "name": "generator name 1",
     "header": "generator header 1",
     "footer": "generator footer 1"
-  },
-  {
-    "name": "generator name 2",
-    "header": "generator header 2",
-    "footer": "generator footer 2"
   }
 ]

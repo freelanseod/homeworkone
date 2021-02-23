@@ -3,18 +3,33 @@ package addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import javax.persistence.Entity;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @XStreamAlias("group")
+@Entity //tied to db hibernate
+@Table(name = "group_list")
 public class GroupData {
     @XStreamOmitField
+    @Id
+    @Column(name = "group_id") //need annotation 'cause column has another name not just id
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "group_name")
     private String name;
+
     @Expose
+    @Column(name = "group_header")
+    @Type(type = "text")
     private String header;
+
     @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private String footer;
 
     public int getId() {
@@ -54,24 +69,24 @@ public class GroupData {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GroupData groupData = (GroupData) o;
+        return id == groupData.id && Objects.equals(name, groupData.name) && Objects.equals(header, groupData.header) && Objects.equals(footer, groupData.footer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, header, footer);
+    }
+
+    @Override
     public String toString() {
         return "GroupData{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GroupData groupData = (GroupData) o;
-        return id == groupData.id && Objects.equals(name, groupData.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
     }
 
 }

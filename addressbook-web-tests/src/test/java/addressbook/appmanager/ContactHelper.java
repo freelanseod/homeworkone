@@ -28,6 +28,17 @@ public class ContactHelper extends BaseHelper {
         type(By.name("company"), addressData.getCompany());
     }
 
+    public void fillAddressFormWithoutPhoto(AddressData addressData) {
+        type(By.name("firstname"), addressData.getFirstname());
+        type(By.name("lastname"), addressData.getLastname());
+        type(By.name("home"), addressData.getHomePhone());
+        type(By.name("mobile"), addressData.getMobilePhone());
+        type(By.name("work"), addressData.getWorkPhone());
+        type(By.name("email"), addressData.getEmail());
+        type(By.name("email2"), addressData.getEmail2());
+        type(By.name("email3"), addressData.getEmail3());
+    }
+
     public void fillAddressFormWithAllFields(AddressData addressData) {
         type(By.name("firstname"), addressData.getFirstname());
         type(By.name("lastname"), addressData.getLastname());
@@ -97,7 +108,7 @@ public class ContactHelper extends BaseHelper {
 
     public void modify(AddressData contact) {
         submitContactEditingById(contact.getId());
-        fillAddressForm(contact);
+        fillAddressFormWithoutPhoto(contact);
         submitContactUpdate();
         returnToHomePage();
     }
