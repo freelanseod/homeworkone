@@ -14,7 +14,7 @@ public class AddressDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().addresses().size() == 0) {
             app.goTo().addressPage();
             app.contact().createContactAllFields();
             app.goTo().homePage();
@@ -23,12 +23,12 @@ public class AddressDeletionTests extends TestBase {
 
     @Test
     public void testDeleteAddress() {
-        Addresses before = app.contact().all();
+        Addresses before = app.db().addresses();
         AddressData deleteContact = before.iterator().next();
 
         app.contact().delete(deleteContact);
 
-        Addresses after = app.contact().all();
+        Addresses after = app.db().addresses();
         Assert.assertEquals(after.size(), before.size() - 1); //compare size of lists
 
         before.without(deleteContact);
@@ -39,7 +39,7 @@ public class AddressDeletionTests extends TestBase {
     public void testDeleteAllAddresses() {
         app.contact().deleteAllAddresses();
 
-        Addresses result = app.contact().all();
+        Addresses result = app.db().addresses();
         Assert.assertEquals(result.size(), 0); //compare size of lists
     }
 

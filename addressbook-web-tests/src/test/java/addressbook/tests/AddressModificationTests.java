@@ -14,7 +14,7 @@ public class AddressModificationTests extends TestBase {
     @BeforeClass
     public void ensurePreconditions() {
         app.goTo().homePage();
-        if (app.contact().all().size() == 0) {
+        if (app.db().addresses().size() == 0) {
             app.goTo().addressPage();
             app.contact().createContactAllFields();
             app.goTo().homePage();
@@ -23,7 +23,7 @@ public class AddressModificationTests extends TestBase {
 
     @Test
     public void testAddressModification() {
-        Addresses before = app.contact().all();
+        Addresses before = app.db().addresses();
         AddressData modifiedContact = before.iterator().next();
 
         AddressData contact = new AddressData()
@@ -32,13 +32,9 @@ public class AddressModificationTests extends TestBase {
 
         app.contact().modify(contact);
 
-        Addresses after = app.contact().all();
+        Addresses after = app.db().addresses();
         Assert.assertEquals(after.size(), before.size()); //compare size of lists
 
-        before.without(modifiedContact);
-        before.withAdded(contact);
-
-        Assert.assertEquals(before, after);
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
 

@@ -65,8 +65,8 @@ public class AddressData {
     private String allEmails;
 
     @Expose
-    @Type(type = "text")
-    private String photo;
+    @Transient
+    private File photo;
 
     public String getFirstname() {
         return firstname;
@@ -129,7 +129,7 @@ public class AddressData {
     }
 
     public File getPhoto() {
-        return new File(photo);
+        return photo;
     }
 
     public AddressData withId(int id) {
@@ -208,8 +208,21 @@ public class AddressData {
     }
 
     public AddressData withPhoto(File photo) {
-        this.photo = photo.getPath();
+        this.photo = photo;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AddressData that = (AddressData) o;
+        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(home, that.home) && Objects.equals(mobile, that.mobile) && Objects.equals(work, that.work) && Objects.equals(email, that.email) && Objects.equals(email2, that.email2) && Objects.equals(email3, that.email3);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname, home, mobile, work, email, email2, email3);
     }
 
     @Override
@@ -218,20 +231,13 @@ public class AddressData {
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", home='" + home + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", work='" + work + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AddressData that = (AddressData) o;
-        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
     }
 
 }

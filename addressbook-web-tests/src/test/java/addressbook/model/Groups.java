@@ -2,7 +2,9 @@ package addressbook.model;
 
 import com.google.common.collect.ForwardingSet;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Groups extends ForwardingSet<GroupData> { //google guava library
@@ -15,6 +17,11 @@ public class Groups extends ForwardingSet<GroupData> { //google guava library
 
     public Groups() {
         this.delegate = new HashSet<GroupData>();
+    }
+
+    //from an arbitrary collection builds an object of type groups
+    public Groups(Collection<GroupData> groups) {
+        this.delegate = new HashSet<GroupData>(groups);
     }
 
     @Override

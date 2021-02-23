@@ -3,10 +3,10 @@
 <suite name="AddressWebTests" verbose="1" >
     <test name="Contacts">
         <classes>
-            <class name="addressbook.tests.AddNewAddressTests"/>
-            <class name="addressbook.tests.AddressDeletionTests"/>
-            <class name="addressbook.tests.AddressEmailTests"/>
             <class name="addressbook.tests.AddressModificationTests"/>
+            <class name="addressbook.tests.AddNewAddressTests"/>
+            <class name="addressbook.tests.AddressEmailTests"/>
+            <class name="addressbook.tests.AddressDeletionTests"/>
             <class name="addressbook.tests.AddressPhoneTests"/>
             <class name="addressbook.tests.AddressPostTests"/>
         </classes>

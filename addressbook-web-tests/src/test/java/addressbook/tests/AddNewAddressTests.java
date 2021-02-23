@@ -59,7 +59,7 @@ public class AddNewAddressTests extends TestBase {
     @Test (dataProvider = "validAddressesFromJson")
     public void testAddNewAddress(AddressData contact) {
         app.goTo().homePage();
-        Addresses before = app.contact().all();
+        Addresses before = app.db().addresses();
         app.goTo().addressPage();
 
 //        File photo = new File("src/test/resources/od.jpg");
@@ -69,7 +69,7 @@ public class AddNewAddressTests extends TestBase {
         app.contact().submitContactAdding();
         app.goTo().homePage();
 
-        Addresses after = app.contact().all();
+        Addresses after = app.db().addresses();
         Assert.assertEquals(after.size(), before.size() + 1); //compare size of lists
 
         AddressData index = contact.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt());
