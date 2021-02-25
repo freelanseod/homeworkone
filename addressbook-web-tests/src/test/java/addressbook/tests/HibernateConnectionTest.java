@@ -49,11 +49,13 @@ public class HibernateConnectionTest {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<AddressData> result = session.createQuery("from AddressData where deprecated = '0000-00-00'").list(); //language OQL
-        for (AddressData addressData : result) {
-            System.out.println(addressData);
-        }
         session.getTransaction().commit();
         session.close();
+
+        for (AddressData addressData : result) {
+            System.out.println(addressData);
+            System.out.println(addressData.getGroups());
+        }
     }
 
 }

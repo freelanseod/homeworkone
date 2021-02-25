@@ -1,9 +1,6 @@
 package addressbook.appmanager;
 
-import addressbook.model.AddressData;
-import addressbook.model.Addresses;
-import addressbook.model.GroupData;
-import addressbook.model.Groups;
+import addressbook.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -20,7 +17,6 @@ public class DbHelper {
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        
     }
 
     public Groups groups() {

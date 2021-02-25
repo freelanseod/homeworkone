@@ -28,6 +28,8 @@ public class GroupDeletionTests extends TestBase {
         Groups after = app.db().groups();
         Assert.assertEquals(after.size(), before.size() - 1); //compare size of lists
         assertThat(after, equalTo(before.without(deleteGroup)));
+
+        verifyGroupListInUI();
     }
 
 }

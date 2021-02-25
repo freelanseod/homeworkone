@@ -2,14 +2,18 @@ package addressbook.appmanager;
 
 import addressbook.model.AddressData;
 import addressbook.model.Addresses;
+import addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.testng.Assert.assertTrue;
 
 public class ContactHelper extends BaseHelper {
     public ContactHelper(WebDriver wd) {
@@ -18,6 +22,10 @@ public class ContactHelper extends BaseHelper {
 
     public void submitContactAdding() {
         click(By.xpath("(//input[@name='submit'])[2]"));
+    }
+
+    public void deleteContact() {
+        wd.findElement(By.cssSelector("input[name='remove']")).click();
     }
 
     public void fillAddressForm(AddressData addressData) {
@@ -37,6 +45,24 @@ public class ContactHelper extends BaseHelper {
         type(By.name("email"), addressData.getEmail());
         type(By.name("email2"), addressData.getEmail2());
         type(By.name("email3"), addressData.getEmail3());
+    }
+
+    public void fillAddressFormWithGroup(AddressData addressData, boolean creation) {
+        type(By.name("firstname"), addressData.getFirstname());
+        type(By.name("lastname"), addressData.getLastname());
+        type(By.name("home"), addressData.getHomePhone());
+        type(By.name("mobile"), addressData.getMobilePhone());
+        type(By.name("work"), addressData.getWorkPhone());
+        type(By.name("email"), addressData.getEmail());
+        type(By.name("email2"), addressData.getEmail2());
+        type(By.name("email3"), addressData.getEmail3());
+
+        if (creation) {
+            if (addressData.getGroups().size() > 0) {
+                assertTrue(addressData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(addressData.getGroups().iterator().next().getName());
+            }
+        }
     }
 
     public void fillAddressFormWithAllFields(AddressData addressData) {
@@ -235,4 +261,22 @@ public class ContactHelper extends BaseHelper {
         //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
+    public void addToGroup(AddressData address, GroupData group) {
+        selectContactById(address.getId());
+        selectGroupInList(group.getId());
+        initAddToGroup();
+        returnToHomePage();
+    }
+
+    public void initAddToGroup() {
+        click(By.name("add"));
+    }
+
+    public void selectGroupInList(int id) {
+        wd.findElement(By.name("to_group")).findElement(By.cssSelector("option[value='" + id + "']")).click();
+    }
+
+    public void selectGroupFromMainList(int id) {
+        wd.findElement(By.cssSelector("option[value='" + id + "']")).click();
+    }
 }

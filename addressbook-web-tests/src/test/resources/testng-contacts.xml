@@ -6,9 +6,11 @@
             <class name="addressbook.tests.AddressModificationTests"/>
             <class name="addressbook.tests.AddNewAddressTests"/>
             <class name="addressbook.tests.AddressEmailTests"/>
-            <class name="addressbook.tests.AddressDeletionTests"/>
             <class name="addressbook.tests.AddressPhoneTests"/>
             <class name="addressbook.tests.AddressPostTests"/>
+            <class name="addressbook.tests.AddressAddToGroupsTests"/>
+            <class name="addressbook.tests.AddressRemoveFromGroupTests"/>
+            <class name="addressbook.tests.AddressDeletionTests"/>
         </classes>
     </test>
 </suite>
