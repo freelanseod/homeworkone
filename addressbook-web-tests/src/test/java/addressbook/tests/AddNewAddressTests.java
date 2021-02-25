@@ -61,10 +61,6 @@ public class AddNewAddressTests extends TestBase {
         app.goTo().homePage();
         Addresses before = app.db().addresses();
         app.goTo().addressPage();
-
-//        File photo = new File("src/test/resources/od.jpg");
-//        AddressData contact = new AddressData().withFirstname("first name test").withLastname("last name test").withHomePhone("+79780230000").withMobilePhone("+79780991122").withWorkPhone("+79785227700").withEmail("f@mail.ru").withEmail2("s@mail.ru").withEmail3("t@mail.ru").withPhoto(photo);
-
         app.contact().fillAddressFormWithAllFields(contact);
         app.contact().submitContactAdding();
         app.goTo().homePage();
@@ -74,6 +70,8 @@ public class AddNewAddressTests extends TestBase {
 
         AddressData index = contact.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt());
         assertThat(after, equalTo(before.withAdded(index)));
+
+        verifyAddressesListInUI();
     }
 
 }

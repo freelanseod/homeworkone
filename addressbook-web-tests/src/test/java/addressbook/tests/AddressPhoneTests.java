@@ -29,6 +29,8 @@ public class AddressPhoneTests extends TestBase {
         AddressData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+
+        verifyAddressesListInUI();
     }
 
     private String mergePhones(AddressData address) {

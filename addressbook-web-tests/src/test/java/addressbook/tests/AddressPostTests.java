@@ -29,6 +29,8 @@ public class AddressPostTests extends TestBase {
         AddressData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getPostAddress(), equalTo(mergeAddress(contactInfoFromEditForm)));
+
+        verifyAddressesListInUI();
     }
 
     private String mergeAddress(AddressData address) {

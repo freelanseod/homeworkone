@@ -33,6 +33,8 @@ public class AddressDeletionTests extends TestBase {
 
         before.without(deleteContact);
         assertThat(after, equalTo(before.without(deleteContact)));
+
+        verifyAddressesListInUI();
     }
 
     @Test

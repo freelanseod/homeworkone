@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("group")
 @Entity //tied to db hibernate
@@ -32,6 +34,9 @@ public class GroupData {
     @Type(type = "text")
     private String footer;
 
+    @ManyToMany(mappedBy = "groups")
+    private Set<AddressData> addresses = new HashSet<>(); //groups from AddressData many to many
+
     public int getId() {
         return id;
     }
@@ -46,6 +51,10 @@ public class GroupData {
 
     public String getFooter() {
         return footer;
+    }
+
+    public Addresses getAddresses() {
+        return new Addresses(addresses);
     }
 
     public GroupData withId(int id) { //pattern builder with..method

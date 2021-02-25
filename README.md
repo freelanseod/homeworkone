@@ -1,2 +1,2 @@
 # homeworkone
-gradle -Pbrowser=firefox testGroups
+gradle clean -Pbrowser=firefox -DverifyUI=true testGroups

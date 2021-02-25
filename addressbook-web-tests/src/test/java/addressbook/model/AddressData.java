@@ -8,7 +8,9 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity //tied to db hibernate
@@ -67,6 +69,11 @@ public class AddressData {
     @Expose
     @Transient
     private File photo;
+
+    @ManyToMany(fetch = FetchType.EAGER) // fix failed to lazily initialize a collection of role FetchType.EAGER or FetchType.LAZY
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id")) //id relates to contact id, group_id relates to group
+    private Set<GroupData> groups = new HashSet<>();
 
     public String getFirstname() {
         return firstname;
@@ -130,6 +137,10 @@ public class AddressData {
 
     public File getPhoto() {
         return photo;
+    }
+
+    public Groups getGroups() {
+        return new Groups(groups); //create a copy
     }
 
     public AddressData withId(int id) {
@@ -238,6 +249,11 @@ public class AddressData {
                 ", email2='" + email2 + '\'' +
                 ", email3='" + email3 + '\'' +
                 '}';
+    }
+
+    public AddressData inGroup(GroupData group) {
+        groups.add(group); //add contact to group by id
+        return this;
     }
 
 }

@@ -66,6 +66,8 @@ public class GroupCreationTests extends TestBase {
 
         GroupData index = group.withId(after.stream().mapToInt(g -> g.getId()).max().getAsInt()); //anon function get id from stream of groups set and find max id
         assertThat(after, equalTo(before.withAdded(index))); //hamcrest works with fluent interfaces
+
+        verifyGroupListInUI();
     }
 
 }

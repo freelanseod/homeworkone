@@ -36,6 +36,8 @@ public class AddressModificationTests extends TestBase {
         Assert.assertEquals(after.size(), before.size()); //compare size of lists
 
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+
+        verifyAddressesListInUI();
     }
 
 }
