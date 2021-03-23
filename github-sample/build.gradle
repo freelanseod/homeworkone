@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'org.testng:testng:7.1.0'
+    compile 'com.jcabi:jcabi-github:0.41'
+}
+
+task tests(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng.xml'
+    }
+}
