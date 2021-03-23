@@ -21,33 +21,15 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
     implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
-    implementation 'com.google.guava:guava:30.0-jre'
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    implementation 'mysql:mysql-connector-java:8.0.23'
     implementation 'org.hibernate:hibernate-core:5.4.27.Final'
 }
 
-task loginTests(type: Test) {
+task tests(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng.xml'
     }
 
     if (project.hasProperty('browser')) {
         systemProperty("browser", "${browser}")
-    }
-}
-
-task testGroups(type: Test) {
-    useTestNG {
-        suites 'src/test/resources/testng-groups.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty("browser", "${browser}")
-    }
-    if (project.hasProperty('target')) {
-        systemProperty("target", "${target}")
-    }
-    if (project.hasProperty("verifyUI")) {
-        systemProperty("verifyUI", "${verifyUI}")
     }
 }

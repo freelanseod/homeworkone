@@ -4,7 +4,13 @@
     <test name="login">
         <classes>
 <!--            <class name="tests.LoginTests"/>-->
-            <class name="tests.RegistrationTests"/>
+<!--            <class name="tests.RegistrationTests"/>-->
+        </classes>
+    </test>
+
+    <test name="soap">
+        <classes>
+            <class name="tests.SoapTests"/>
         </classes>
     </test>
 </suite>
