@@ -36,10 +36,6 @@ public class ApplicationManager {
         properties.load(new FileReader(String.format("src/test/resources/%s.properties", target)));
     }
 
-    private void logout() {
-        wd.findElement(By.linkText("Logout")).click();
-    }
-
     public void stop() {
         if (wd != null) {
             wd.quit();

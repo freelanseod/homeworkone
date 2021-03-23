@@ -1,4 +1,4 @@
-package helper;
+package model;
 
 import java.util.Objects;
 
@@ -6,6 +6,8 @@ public class Issue {
     private int id;
     private String subject;
     private String description;
+    private String stateName;
+    private int state;
 
     public int getId() {
         return id;
@@ -20,6 +22,10 @@ public class Issue {
         return subject;
     }
 
+    public String getStateName() {
+        return stateName;
+    }
+
     public Issue withSubject(String subject) {
         this.subject = subject;
         return this;
@@ -29,8 +35,22 @@ public class Issue {
         return description;
     }
 
+    public int getState() {
+        return state;
+    }
+
     public Issue withDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public Issue withStateName(String stateName) {
+        this.stateName = stateName;
+        return this;
+    }
+
+    public Issue withState(int state) {
+        this.state = state;
         return this;
     }
 
@@ -39,12 +59,12 @@ public class Issue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return id == issue.id && Objects.equals(subject, issue.subject) && Objects.equals(description, issue.description);
+        return id == issue.id && state == issue.state && Objects.equals(subject, issue.subject) && Objects.equals(description, issue.description) && Objects.equals(stateName, issue.stateName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, subject, description);
+        return Objects.hash(id, subject, description, stateName, state);
     }
 
 }

@@ -3,8 +3,8 @@
 <suite name="Bugify" verbose="1" >
     <test name="rest">
         <classes>
-            <class name="RestTests"/>
-            <class name="RestAssuredTests"/>
+            <class name="tests.RestTests"/>
+            <class name="tests.RestAssuredTests"/>
         </classes>
     </test>
 </suite>
