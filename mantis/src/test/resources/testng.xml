@@ -3,8 +3,8 @@
 <suite name="Mantis" verbose="1" >
     <test name="login">
         <classes>
-<!--            <class name="tests.LoginTests"/>-->
-<!--            <class name="tests.RegistrationTests"/>-->
+            <class name="tests.LoginTests"/>
+            <class name="tests.RegistrationTests"/>
         </classes>
     </test>
 
