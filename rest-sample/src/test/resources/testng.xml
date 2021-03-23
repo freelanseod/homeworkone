@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Bugify" verbose="1" >
+    <test name="rest">
+        <classes>
+            <class name="RestTests"/>
+            <class name="RestAssuredTests"/>
+        </classes>
+    </test>
+</suite>
