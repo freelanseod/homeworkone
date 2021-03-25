@@ -25,3 +25,7 @@ task tests(type: Test) {
         suites 'src/test/resources/testng.xml'
     }
 }
+
+test {
+    useTestNG()
+}
