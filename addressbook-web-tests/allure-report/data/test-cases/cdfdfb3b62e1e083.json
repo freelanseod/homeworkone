@@ -1,0 +1,46 @@
+{
+  "uid" : "cdfdfb3b62e1e083",
+  "name" : "testDeleteGroup",
+  "fullName" : "AddressWebTests.testDeleteGroup",
+  "historyId" : "f21d654317d9fd431a7f8fc2cd1b233f",
+  "time" : {
+    "start" : 1617125435180,
+    "stop" : 1617125435524,
+    "duration" : 344
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressWebTests"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressWebTests"
+  }, {
+    "name" : "testMethod",
+    "value" : "testDeleteGroup"
+  }, {
+    "name" : "package",
+    "value" : "AddressWebTests"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cdfdfb3b62e1e083.json",
+  "parameterValues" : [ ]
+}

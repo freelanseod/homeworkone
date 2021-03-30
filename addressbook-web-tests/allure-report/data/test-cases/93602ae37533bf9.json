@@ -1,0 +1,46 @@
+{
+  "uid" : "93602ae37533bf9",
+  "name" : "testGroupModification",
+  "fullName" : "AddressWebTests.testGroupModification",
+  "historyId" : "77c16d309f8346dcaae8d4cc5ab959e6",
+  "time" : {
+    "start" : 1617125433873,
+    "stop" : 1617125435102,
+    "duration" : 1229
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "AddressWebTests"
+  }, {
+    "name" : "testClass",
+    "value" : "AddressWebTests"
+  }, {
+    "name" : "testMethod",
+    "value" : "testGroupModification"
+  }, {
+    "name" : "package",
+    "value" : "AddressWebTests"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "93602ae37533bf9.json",
+  "parameterValues" : [ ]
+}
