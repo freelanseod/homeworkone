@@ -1,2 +1,2 @@
 # homeworkone
-gradle clean -Pbrowser=firefox -DverifyUI=true testGroups
+gradle clean -Pbrowser=firefox -DverifyUI=true -Pplatform=mac -Ptarget=remote testGroups
