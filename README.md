@@ -1,4 +1,4 @@
-# homeworkone
+# Программирование на java для тестировщиков Баранцев.
 gradle clean -Pbrowser=firefox -DverifyUI=true -Pplatform=mac -Ptarget=remote testGroups
 
 p.s.
