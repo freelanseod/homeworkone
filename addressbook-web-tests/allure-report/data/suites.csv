@@ -1,5 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Mar 30 20:30:33 MSK 2021","Tue Mar 30 20:30:35 MSK 2021","1229","","AddressWebTests","","AddressWebTests","testGroupModification","testGroupModification",""
-"passed","Tue Mar 30 20:30:31 MSK 2021","Tue Mar 30 20:30:32 MSK 2021","1403","","AddressWebTests","","AddressWebTests","testCreationGroup[GroupData{id='2147483647', name='generator name 0'}]","testCreationGroup[GroupData{id='2147483647', name='generator name 0'}]",""
-"passed","Tue Mar 30 20:30:35 MSK 2021","Tue Mar 30 20:30:35 MSK 2021","344","","AddressWebTests","","AddressWebTests","testDeleteGroup","testDeleteGroup",""
-"passed","Tue Mar 30 20:30:32 MSK 2021","Tue Mar 30 20:30:33 MSK 2021","1057","","AddressWebTests","","AddressWebTests","testCreationGroup[GroupData{id='2147483647', name='generator name 1'}]","testCreationGroup[GroupData{id='2147483647', name='generator name 1'}]",""
