@@ -118,4 +118,8 @@ public class GroupHelper extends BaseHelper {
         return groups;
     }
 
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
 }

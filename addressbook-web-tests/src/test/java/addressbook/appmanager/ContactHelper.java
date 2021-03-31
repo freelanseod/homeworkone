@@ -279,4 +279,9 @@ public class ContactHelper extends BaseHelper {
     public void selectGroupFromMainList(int id) {
         wd.findElement(By.cssSelector("option[value='" + id + "']")).click();
     }
+
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
 }

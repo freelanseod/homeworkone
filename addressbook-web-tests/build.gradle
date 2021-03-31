@@ -23,9 +23,9 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'mysql:mysql-connector-java:8.0.23'
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.28.Final'
-
     agent "org.aspectj:aspectjweaver:1.8.0"
     compile "ru.yandex.qatools.allure:allure-testng-adaptor:1.4.0.RC4"
+    implementation 'org.robotframework:robotframework:3.2.2'
 }
 
 test {
@@ -84,4 +84,10 @@ task testHb(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-hb.xml'
     }
+}
+
+task rf(type: JavaExec) {
+    main = 'org.robotframework.RobotFramework'
+    classpath = sourceSets.test.runtimeClasspath
+    args 'src/test/resources/rf'
 }
