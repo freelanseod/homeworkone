@@ -7,4 +7,8 @@
             <class name="tests.RestAssuredTests"/>
         </classes>
     </test>
+
+    <listeners>
+        <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
+    </listeners>
 </suite>
